@@ -534,3 +534,129 @@ div.comment_list {
 
 /* Single Line IE Fixes */
 * html #nav1, * html #nav2, * html #layout_body, * html #dashboard_inner, * html #footer {height: 0.01%; min-height: 0.01%;}
+
+
+/*
+   Mobile / responsive
+   -------------------------------------------------------------------
+   Added 2026. Desktop layout above is untouched; everything here only
+   applies at narrow widths. The original template is fixed at 906px with
+   sliced background images, so below that width we drop to one column
+   and swap the image slices for the flat colors they contained.
+*/
+
+/* Never let an image blow out the layout */
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+@media screen and (max-width: 940px) {
+
+	/* Readable base size on a phone (template default is ~12.8px) */
+	body {
+		font-size: 1em;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	/* Let the wrapper shrink instead of forcing 906px */
+	#layout_wrapper {
+		width: auto;
+		max-width: 906px;
+	}
+
+	/* Header image slice is 1060px wide and cropped awkwardly when narrow */
+	#layout_wrapper_outer {
+		background-image: none;
+	}
+
+	#layout_top {
+		height: auto;
+		padding-bottom: 10px;
+	}
+
+	#site_title {
+		padding: 18px 12px 0;
+	}
+
+	#site_title h1 {
+		font-size: 1.9em;
+	}
+
+	/* These background slices are all fixed at 890-906px wide */
+	#layout_body,
+	#navigation,
+	#footer {
+		background-image: none;
+	}
+
+	/* main.gif is the two-column stripe: #EEE content, #DDD sidebar.
+	   Single column, so just use the content color. */
+	#main {
+		background: #EEE;
+	}
+
+	/* Stack the content and photo instead of floating them side by side */
+	#content_outer,
+	#sidebar_outer {
+		float: none;
+		width: auto;
+	}
+
+	#content,
+	#sidebar {
+		overflow-wrap: break-word;
+		word-wrap: break-word;
+	}
+
+	#content {
+		padding: 14px;
+	}
+
+	#sidebar {
+		border-top: 1px solid #D5D5D5;
+		padding: 16px 14px;
+	}
+
+	/* Roomier tap targets for the [pdf] / [slides] links */
+	#content li a {
+		display: inline-block;
+		padding: 3px 2px;
+	}
+
+	#main ol,
+	#main ul {
+		margin-left: 1.2em;
+	}
+
+	#footer .left,
+	#footer .right {
+		float: none;
+	}
+
+	/* Trim the trailing margin stack under the last section. On desktop
+	   the sidebar fills this space, but single-column it reads as a gap. */
+	#content .post:last-child {
+		margin-bottom: 0;
+	}
+
+	#content .post:last-child .post_body ul:last-child {
+		margin-bottom: 0.3em;
+	}
+}
+
+/* Very narrow phones */
+@media screen and (max-width: 420px) {
+
+	#site_title h1 {
+		font-size: 1.6em;
+	}
+
+	#content {
+		padding: 12px 10px;
+	}
+
+	#navigation {
+		font-size: 1.1em;
+	}
+}
