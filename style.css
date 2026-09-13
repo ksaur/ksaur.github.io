@@ -74,7 +74,7 @@ h1,h4,h5{
 h6{
 	color: #5090AE;
 	margin-bottom: 0.0em;
-        font-size:14px;
+	font-size: 1.1em; /* was 14px; relative so it scales with the mobile base size */
 }
 
 
@@ -537,6 +537,29 @@ div.comment_list {
 
 
 /*
+   Content tweaks
+   -------------------------------------------------------------------
+   Lead paragraph and in-section subheading. The template's default h3
+   is 1.6em, nearly as large as an h2, so it's scaled down inside
+   #content where it's used as a subheading rather than a section title.
+*/
+
+#content p.intro {
+	color: #5090AE;
+	font-size: 1.4em;
+	line-height: 1.4em;
+	padding: 0 0 0.7em;
+}
+
+#content h3 {
+	color: #456;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 1.4em 0 0.5em;
+}
+
+
+/*
    Mobile / responsive
    -------------------------------------------------------------------
    Added 2026. Desktop layout above is untouched; everything here only
@@ -596,11 +619,22 @@ img {
 		background: #EEE;
 	}
 
-	/* Stack the content and photo instead of floating them side by side */
+	/* Stack the content and photo instead of floating them side by side.
+	   Flex column so the photo can be reordered above the bio: left in
+	   source order it lands below ~3800px of publications and patents. */
+	#main {
+		display: flex;
+		flex-direction: column;
+	}
+
 	#content_outer,
 	#sidebar_outer {
 		float: none;
 		width: auto;
+	}
+
+	#sidebar_outer {
+		order: -1;
 	}
 
 	#content,
@@ -614,14 +648,23 @@ img {
 	}
 
 	#sidebar {
-		border-top: 1px solid #D5D5D5;
-		padding: 16px 14px;
+		border-top: none;
+		border-bottom: 1px solid #D5D5D5;
+		padding: 18px 14px;
+		text-align: center;
 	}
 
-	/* Roomier tap targets for the [pdf] / [slides] links */
+	#sidebar img {
+		width: 140px;
+	}
+
+	/* Roomier tap targets for the [pdf] / [slides] links. Horizontal
+	   padding only: vertical padding on an inline-block grows the line
+	   box, which made link lines sit lower than the rest of the entry. */
 	#content li a {
 		display: inline-block;
-		padding: 3px 2px;
+		vertical-align: baseline;
+		padding: 0 3px;
 	}
 
 	#main ol,
@@ -636,6 +679,11 @@ img {
 
 	/* Trim the trailing margin stack under the last section. On desktop
 	   the sidebar fills this space, but single-column it reads as a gap. */
+	/* The 1.4em top margin reads airier at phone base size */
+	#content h3 {
+		margin-top: 0.9em;
+	}
+
 	#content .post:last-child {
 		margin-bottom: 0;
 	}
